@@ -3,8 +3,8 @@ var Schema = mongoose.Schema;
 
 var BookSchema = new Schema({
 	_id: {type: String, required: true},
-	category: {type: String, required: true},
-	authors: {type: [String], required: true},
+	category: {type: String, required: true, index: true},
+	authors: {type: [String], required: true, index: true},
 	createdAt: {type: Date, default: Date.now},
 	lastUpdated: {type: Date, default: Date.now}
 });

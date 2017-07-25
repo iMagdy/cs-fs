@@ -1,8 +1,8 @@
 var Book = require('../models/book');
 
 module.exports = {
-	list: function (req, res) {
-		Book.find({}, function(err, books) {
+	list: function (req, res, query) {
+		Book.find(query, function(err, books) {
 			res.json(books);
 		});
 	},

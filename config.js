@@ -1,5 +1,6 @@
 module.exports = {
 	'admin' : 'admin-password',
 	'secret': 'strong-password',
-	'database': 'mongodb://0.0.0.0:27017'
+	'database': 'mongodb://mongodb'
+	//'database': 'mongodb://0.0.0.0:27017'
 }

@@ -313,6 +313,28 @@ describe('Books', () => {
       	});
 	});
 
+	describe('/GET/ q book', () => {
+      	it('it should GET a book by query strings', (done) => {
+        	let book = new Book({ _id: "The Lord of the Rings", category: "Novel", authors: ["J.R.R. Tolkien", "Tamer Bahgat"]});
+	        book.save((err, book) => {
+    	        chai.request(server)
+        	    	.get('/api/books?authors=Tamer Bahgat')
+        	    	.set('x-access-token', userToken)
+            		.send(book)
+	            	.end((err, res) => {
+    	            	res.should.have.status(200);
+    	    	        res.body.should.be.a('array');
+  						res.body[0].should.be.a('object');
+        	    	    res.body[0].should.have.property('_id').eql(book.id);
+            	    	res.body[0].should.have.property('category');
+    	        	    res.body[0].should.have.property('authors');
+            			done();
+	            	});
+    	    });
+
+      	});
+	});
+
 	describe('/POST/ id book', () => {
       it('it should UPDATE a book given the id', (done) => {
         let book = new Book({_id: "The Chronicles of Narnia", category: "Novel", authors: ["C.S. Lewis"]})
