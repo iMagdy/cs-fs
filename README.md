@@ -4,6 +4,7 @@
 
 For the back-end 
 
+- Create a directory 'mongo' inside 'db' directory.
 - Run `docker-compose up`
 
 To test the back-end:
@@ -16,9 +17,9 @@ For the front-end
 
 - First to compile Sass files:
 
-        `$ cd books-front`
-        `$ npm install`
-        `$ npm start`
+        $ cd books-front
+        $ npm install
+        $ npm start
 
 
 
