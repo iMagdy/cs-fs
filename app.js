@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
+var cors = require('cors')
 
 var User = require('./app/models/user');
 var config = require('./config');
@@ -19,6 +20,7 @@ mongoose.connect(config.database, {useMongoClient: true});
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use(morgan('dev'));
 
@@ -33,7 +35,11 @@ userRoute(app, apiRoutes);
 
 
 function authorize(req, res, next, secret) {
+	//res.header("Access-Control-Allow-Origin", "*");
+  	//res.header("Access-Control-Allow-Headers", "X-Access-Token, Origin, X-Requested-With, Content-Type, Accept");
+	
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
+		console.log(req.headers);
 
 	if (token) {
 		jwt.verify(token, app.get(secret), function(err, decoded) {

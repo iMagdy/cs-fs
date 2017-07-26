@@ -4,8 +4,13 @@ var bcrypt = require('bcrypt');
 var User = require('../models/user');
 
 function signup(req, res, admin) {
-	if (!req.body || req.body.name && req.body.name.length === 0 || req.body.password && req.body.password.length === 0) return res.sendStatus(400);
+	//res.header("Access-Control-Allow-Origin", "*");
+  	//res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	
+	if (!req.body || !req.body.name || (req.body.name && req.body.name === "") || !req.body.password || (req.body.password && req.body.password === "")) return res.sendStatus(400);
 
+	console.log(req.body.name);
+	console.log(req.body.password);
 	var saltRounds = 10;
 	var pass = req.body.password;
 	bcrypt.hash(pass, saltRounds, function(err, hash) {
@@ -20,7 +25,6 @@ function signup(req, res, admin) {
 				});
 
 				user.save(function(err){
-					//if (err) throw err;
 					if (err) return res.send(err);
 
 					console.log('User saved successfully');
@@ -36,6 +40,9 @@ function signup(req, res, admin) {
 }
 
 function authenticate(req, res, secret, app) {
+	//res.header("Access-Control-Allow-Origin", "*");
+  	//res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	
 	if (!req.body || !req.body.name || req.body.name && req.body.name === "" || !req.body.password || req.body.password && req.body.password === "") return res.sendStatus(400);
 
 	User.findById(req.body.name, function(err, user) {

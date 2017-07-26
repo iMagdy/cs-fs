@@ -13,7 +13,16 @@ module.exports = function(adminRoutes) {
 	});
 
 	adminRoutes.post('/addBook', function(req, res) {
+		//res.header("Access-Control-Allow-Origin", "*");
+  		//res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	
 		if (!req.body || req.body.title && req.body.title.length === 0 || req.body.category && req.body.category.length === 0 || req.body.authors && (!Array.isArray(req.body.authors) || req.body.authors.length === 0)) return res.sendStatus(400);
+
+		console.log(req.body);
+		if (req.body['authors[]']) {
+			req.body['authors'] = req.body['authors[]'];
+			delete req.body['autors[]'];
+		}
 
 		Book.findById(req.body.title, function(err, book) {
 			if (err) return res.send(err);
@@ -39,8 +48,16 @@ module.exports = function(adminRoutes) {
 	});
 
 	adminRoutes.post('/updateBook', function(req, res) {
+		//res.header("Access-Control-Allow-Origin", "*");
+  		//res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	
 		if (!req.body || req.body.title && req.body.title.length === 0 || req.body.category && req.body.category.length === 0 || req.body.authors && (!Array.isArray(req.body.authors) || req.body.authors.length === 0)) return res.sendStatus(400);
 
+		if (req.body['authors[]']) {
+			req.body['authors'] = req.body['authors[]'];
+			delete req.body['autors[]'];
+		}
+		
 		var alt = {_id: req.body.title};
 		if (req.body.category)
 			alt.category = req.body.category;
@@ -59,6 +76,9 @@ module.exports = function(adminRoutes) {
 	});
 
 	adminRoutes.delete('/book/:id', function(req, res) {
+		//res.header("Access-Control-Allow-Origin", "*");
+  		//res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	
 		Book.remove({_id: req.params.id}, function(err, doc) {
 			if (err) return res.send(err);
 			console.log('Book deleted successfully');

@@ -1,0 +1,124 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Library</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li class="menu-text">Books Library</li>
+          <li><a href="./admin.html">Admin</a></li>
+        </ul>
+      </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li><button type="button" class="button showlogout" data-open="searchModel">Search</button></li>
+
+        <li><a data-open="loginModel"  id="showlogin" class="showlogin">Login</a></li>
+        <li><a id="showlogout" class="showlogout">Loguot</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reveal" id="loginModel" data-reveal>
+    <h1>Reader Login</h1>
+    <form id="userlogin">
+      <div class="row">
+        <label>
+          <input name= "username1"  type="text" placeholder="Username">
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <input name= "password1"  type="password" placeholder="Password">
+        </label>
+      </div>
+      <button class="button" type="submit" data-close>Login</button>
+      or
+    </form>
+    <button class="button" data-open="signupModel">Sign Up</button>
+    <button class="close-button" data-close aria-label="Close reveal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <!-- This is the nested modal -->
+  <div class="reveal" id="signupModel" data-reveal>
+    <h2>Reader Sign Up</h2>
+    <form id="usersignup">
+      <div class="row">
+        <label>
+          <input name= "username" type="text" placeholder="Username">
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <input name= "password" type="password" placeholder="Password">
+        </label>
+      </div>
+      <button class="button" type="submit" data-close>Sign Up</button>
+    </form>
+    <button class="close-button" data-close aria-label="Close reveal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <ul id="bookslist"></ul>
+
+  <div class="reveal" id="viewBookModel" data-reveal>
+        <div class="columns large-6 medium-6">
+          <h2 id="title1"></h2>
+        </div>
+        <div class="columns large-6 medium-6">
+          <label id="category1"></label>
+        </div>
+        <div class="columns large-6 medium-6">
+          <label>Authors : 
+            <ul id="authors1">
+            </ul>
+          </label>
+        </div>
+    <button class="close-button" data-close aria-label="Close reveal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="reveal" id="searchModel" data-reveal>
+    <form id="searchForm">
+        <div class="columns large-6 medium-6">
+          <label> By title 
+            <input id="searchTitle" name="searchTitle" type="text" placeholder="Title">
+          </label>
+        </div>
+        <div class="columns large-6 medium-6">
+          <label> By Category 
+            <input id="searchCategory" name="searchCategory" type="text" placeholder="Category">
+          </label>
+        </div>
+        <div class="columns large-6 medium-6">
+          <label>Authors
+            <div id="searchAuthors">
+              <input id="searchAuthor" class="searchAuthor" name="searchAuthor" type="text" placeholder="Author">
+            </div>
+          </label>
+          <button id="addAuthorSearch" class="button addAuthorSearch">Add one more author</button>
+        </div>
+        <button class="button" type="submit" data-close>Search</button>
+      </form>
+    <button class="close-button" data-close aria-label="Close reveal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/what-input/dist/what-input.js"></script>
+    <script src="bower_components/foundation-sites/dist/js/foundation.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>
