@@ -7,14 +7,6 @@ For the back-end
 - Create a directory 'mongo' inside 'db' directory.
 - Run `docker-compose up`
 
-To test the back-end:
-
-- Edit MongoDB connection in config.js
-- Run `$ npm install`
-- Run `$ npm test`
-
-For the front-end
-
 - First to compile Sass files:
 
         $ cd books-front
@@ -22,6 +14,7 @@ For the front-end
         $ npm start
 
 
+## Challenge description
 
 This challenge will test your skills in the following areas:
 

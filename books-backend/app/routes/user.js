@@ -7,8 +7,9 @@ function signup(req, res, admin) {
 	//res.header("Access-Control-Allow-Origin", "*");
   	//res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	
-	if (!req.body || !req.body.name || (req.body.name && req.body.name === "") || !req.body.password || (req.body.password && req.body.password === "")) return res.sendStatus(400);
-
+	//if (!req.body || !req.body.name || (req.body.name && req.body.name === "") || !req.body.password || (req.body.password && req.body.password === "")) return res.sendStatus(400);
+	if (!req.body)  return res.sendStatus(400);
+	
 	console.log(req.body.name);
 	console.log(req.body.password);
 	var saltRounds = 10;

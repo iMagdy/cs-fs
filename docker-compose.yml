@@ -19,14 +19,14 @@ services:
             image: node
             container_name: books-api1
             ports:
-                - 3000:3000
+                - 3000
             volumes:
-                - ./app:/app
-                - ./app.js:/app.js
-                - ./config.js:/config.js
-                - ./package.json:/package.json
-                - ./package_lock.json:/package_lock
-                - ./test.js:/test.js
+                - ./books-backend/app:/app
+                - ./books-backend/app.js:/app.js
+                - ./books-backend/config.js:/config.js
+                - ./books-backend/package.json:/package.json
+                - ./books-backend/package_lock.json:/package_lock
+                - ./books-backend/test.js:/test.js
             links:
                 - mongodb
             command: bash -c "npm install && npm start"
@@ -37,12 +37,12 @@ services:
             ports:
                 - 3000
             volumes:
-                - ./app:/app
-                - ./app.js:/app.js
-                - ./config.js:/config.js
-                - ./package.json:/package.json
-                - ./package_lock.json:/package_lock
-                - ./test.js:/test.js
+                - ./books-backend/app:/app
+                - ./books-backend/app.js:/app.js
+                - ./books-backend/config.js:/config.js
+                - ./books-backend/package.json:/package.json
+                - ./books-backend/package_lock.json:/package_lock
+                - ./books-backend/test.js:/test.js
             links:
                 - mongodb
             command: bash -c "npm install && npm start"
@@ -53,12 +53,12 @@ services:
             ports:
                 - 3000
             volumes:
-                - ./app:/app
-                - ./app.js:/app.js
-                - ./config.js:/config.js
-                - ./package.json:/package.json
-                - ./package_lock.json:/package_lock
-                - ./test.js:/test.js
+                - ./books-backend/app:/app
+                - ./books-backend/app.js:/app.js
+                - ./books-backend/config.js:/config.js
+                - ./books-backend/package.json:/package.json
+                - ./books-backend/package_lock.json:/package_lock
+                - ./books-backend/test.js:/test.js
             links:
                 - mongodb
             command: bash -c "npm install && npm start"
