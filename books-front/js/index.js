@@ -22,7 +22,6 @@ $(document).ready(function() {
                     books = JSON.stringify(dataString);
                     console.log(books);
                     if (Array.isArray(dataString)){
-                        console.log('hi');
                         $('.showlogin').hide();
                         $('.showlogout').show();
                         $books.empty();
@@ -121,7 +120,6 @@ $(document).ready(function() {
             data: formData,  
             contentType: 'application/x-www-form-urlencoded',
             success: function(dataString) { 
-                console.log(JSON.stringify(dataString));
                 if (dataString.success) {
                     window.localStorage.setItem('books-api-token', dataString.token);
                     alert('Welcome ' + formData.name);

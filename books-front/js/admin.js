@@ -2,11 +2,9 @@ $(document).ready(function() {
 
     var books = [];
     var $books = $('#bookslist');
-        var flag = false;
 
     function listBooks(books) {
         if (books.length > 0) {
-            flag = true;
             $.each(books, function(book) {
                 $books.append('<li data-open="updateBookModel" class="callout primary">' + books[book]._id + '</li>');
             });
@@ -16,14 +14,12 @@ $(document).ready(function() {
     }
 
     function getBooks() {
-
         $.ajax({  
                 type: "GET",
                 url: "http://localhost:80/api/admin/books",
                 headers: {'x-access-token': window.localStorage.getItem('books-admin-api-token')},
                 success: function(dataString) { 
                     books = JSON.stringify(dataString);
-                    console.log(books);
                     if (Array.isArray(dataString)){
                         $('.showlogin').hide();
                         $('.showlogout').show();
@@ -108,10 +104,9 @@ $(document).ready(function() {
             data: formData,  
             contentType: 'application/x-www-form-urlencoded',
             success: function(dataString) { 
-                console.log(JSON.stringify(dataString));
                 if (dataString.success) {
                     window.localStorage.setItem('books-admin-api-token', dataString.token);
-                    getBooks();
+                    checkLoggedIn();
                     alert('Welcome ' + formData.name);
                 } else {
                     if (dataString.message) {
@@ -125,7 +120,7 @@ $(document).ready(function() {
                 } else if (error.status === 400){
                     alert('Please enter your username and password.');
                 }
-                getBooks();
+                //checkLoggedIn();
             }
         });
     });
@@ -165,15 +160,18 @@ $(document).ready(function() {
             success: function(dataString) { 
                 console.log(JSON.stringify(dataString));
                 if (dataString.success) {
+                    alert(dataString.message);
                     getBooks();
                 } else {
-                    if (dataString.errors)
+                    if (dataString.errors) {
                         if (dataString.errors._id)
                             alert('Field `title` is required');
                         if (dataString.errors.category)
                             alert(dataString.errors.category.message);
                         if (dataString.errors.authors)
                             alert(dataString.errors.authors.message);
+                    } else 
+                        alert(dataString.message);
                 }
             }, error: function(error) {
                 console.log(error);
@@ -256,13 +254,16 @@ $(document).ready(function() {
             success: function(dataString) { 
                 console.log(JSON.stringify(dataString));
                 if (dataString.success) {
+                    alert(dataString.message);
                     getBooks();
                 } else {
-                    if (dataString.errors)
+                    if (dataString.errors) {
                         if (dataString.errors.category)
                             alert(dataString.errors.category.message);
                         if (dataString.errors.authors)
                             alert(dataString.errors.authors.message);
+                    } else 
+                        alert(dataString.message);
                 }
             }, error: function(error) {
                 console.log(error);
@@ -278,7 +279,6 @@ $(document).ready(function() {
 
     $('#deleteBook').submit(function(event) {
         event.preventDefault();
-        console.log('hello');
         $.ajax({  
             type: "DELETE",  
             url: "http://localhost:80/api/admin/book/" + document.getElementById('title1').innerText,
@@ -287,13 +287,16 @@ $(document).ready(function() {
             success: function(dataString) { 
                 console.log(JSON.stringify(dataString));
                 if (dataString.success) {
+                    alert(dataString.message);
                     getBooks();
                 } else {
-                    if (dataString.errors)
+                    if (dataString.errors) {
                         if (dataString.errors.category)
                             alert(dataString.errors.category.message);
                         if (dataString.errors.authors)
                             alert(dataString.errors.authors.message);
+                    } else
+                        alert(dataString.message);
                 }
             }, error: function(error) {
                 console.log(error);

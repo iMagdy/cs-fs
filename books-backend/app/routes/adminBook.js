@@ -5,7 +5,7 @@ var bookDefault = require('./book');
 module.exports = function(adminRoutes) {
 
 	adminRoutes.get('/books', function(req, res) {
-		bookDefault.list(req, res);
+		bookDefault.list(req, res, {});
 	});
 
 	adminRoutes.get('/book/:title', function(req, res) {

@@ -9,7 +9,8 @@ module.exports = function(bookRoutes) {
 			req.query._id = req.query.title;
 			delete req.query.title;
 		}
-		Book.list(req, res, req.query);
+
+		Book.list(req, res, req.query)
 	});
 
 	bookRoutes.get('/:title', function(req, res) {

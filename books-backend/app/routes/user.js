@@ -14,8 +14,6 @@ function signup(req, res, admin) {
 		req.body.password = null;
 	}
 
-	console.log(req.body.name);
-	console.log(req.body.password);
 	var saltRounds = 10;
 	var pass = req.body.password;
 	bcrypt.hash(pass, saltRounds, function(err, hash) {
@@ -71,7 +69,6 @@ function authenticate(req, res, secret, app) {
 				if (err) return res.send(err);
 
 				if (resp) {
-					console.log('resp');
 					var token = jwt.sign(user, app.get(secret), {
 						expiresIn: 15 * 60
 					}, { algorithm: 'ES512'});
