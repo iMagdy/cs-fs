@@ -85,8 +85,14 @@ $(document).ready(function() {
     	    success: function(dataString) { 
                 console.log('success');
                 console.log(dataString);
-                if (dataString.message)
-                    alert(dataString.message); 
+                if (dataString.message){
+                    if (dataString.message.indexOf("_id") !== -1) {
+                        alert ('User validation failed: username is required.');
+                        if (dataString.message.indexOf("password") !== -1)
+                            alert ('User validation failed: password is required.')
+                    } else 
+                        alert(dataString.message); 
+                }
 	            //console.log(JSON.stringify(dataString));
         	}, error: function(error) {
                 console.log(error);

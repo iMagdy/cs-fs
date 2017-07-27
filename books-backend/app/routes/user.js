@@ -9,7 +9,11 @@ function signup(req, res, admin) {
 	
 	//if (!req.body || !req.body.name || (req.body.name && req.body.name === "") || !req.body.password || (req.body.password && req.body.password === "")) return res.sendStatus(400);
 	if (!req.body)  return res.sendStatus(400);
-	
+
+	if (req.body.password === "") {
+		req.body.password = null;
+	}
+
 	console.log(req.body.name);
 	console.log(req.body.password);
 	var saltRounds = 10;
@@ -45,6 +49,12 @@ function authenticate(req, res, secret, app) {
   	//res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	
 	if (!req.body || !req.body.name || req.body.name && req.body.name === "" || !req.body.password || req.body.password && req.body.password === "") return res.sendStatus(400);
+
+	/*if (!req.body)  return res.sendStatus(400);
+
+	if (req.body.password === "") {
+		req.body.password = null;
+	}*/
 
 	User.findById(req.body.name, function(err, user) {
 		//if (err) throw err;
