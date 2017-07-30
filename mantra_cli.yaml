@@ -1,0 +1,22 @@
+tabSize: 2
+storybook: false
+generateComponentTests: false
+generateContainerTests: false
+
+templates:
+  - name: 'component'
+    text: |
+      import React from 'react';
+      const WarrantX<%= componentName %> = ({}) => {
+        return (
+          <div>
+            WarrantX<%= componentName %>
+          </div>
+        );
+      }
+  - name: 'action'
+    text: |
+      const actions = {
+
+      };
+      export default actions;
