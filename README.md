@@ -4,7 +4,7 @@
 
 For the back-end 
 
-- Create a directory 'mongo' inside 'db' directory.
+- Create a directory 'db/mongo'.
 - Run `docker-compose up`
 
 - First to compile Sass files:
