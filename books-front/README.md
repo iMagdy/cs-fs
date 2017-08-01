@@ -46,3 +46,6 @@ bower install
 ```
 
 Finally, run `npm start` to run the Sass compiler. It will re-run every time you save a Sass file.
+
+For `Reader` page, open index.html in your browser.
+For `admin` page, open admin.html in your browser.
