@@ -1,5 +1,21 @@
 ## Books Library
 
+### Usage
+
+For the back-end 
+
+- Create a directory 'db/mongo'.
+- Run `docker-compose up`
+
+- First to compile Sass files:
+
+        $ cd books-front
+        $ npm install
+        $ npm start
+
+
+## Challenge description
+
 This challenge will test your skills in the following areas:
 
 - Node JS

@@ -1,0 +1,68 @@
+version: '3'
+services:
+
+    #nginx
+        nginx:
+            image: nginx
+            container_name: books-nginx
+            ports: 
+                - 80:80
+            links:
+                - node1:node1
+                - node2:node2
+                - node3:node3
+            volumes:
+                - ./nginx:/etc/nginx
+
+    # Back-end
+        node1:
+            image: node
+            container_name: books-api1
+            ports:
+                - 3000
+            volumes:
+                - ./books-backend:/app
+            links:
+                - mongodb
+            environment:
+                - admin=admin-password
+                - secret=strong-password
+            command: bash -c "cd /app && npm install && npm start"
+
+        node2:
+            image: node
+            container_name: books-api2
+            ports:
+                - 3000
+            volumes:
+                - ./books-backend:/app
+            links:
+                - mongodb
+            environment:
+                - admin=admin-password
+                - secret=strong-password
+            command: bash -c "cd /app && npm install && npm start"
+
+        node3:
+            image: node
+            container_name: books-api3
+            ports:
+                - 3000
+            volumes:
+                - ./books-backend:/app
+            links:
+                - mongodb
+            environment:
+                - admin=admin-password
+                - secret=strong-password
+            command: bash -c "cd /app && npm install && npm start"
+
+
+    # MongoDB
+        mongodb:
+            image: mongo
+            container_name: books-mongo
+            ports:
+                - 27017
+            volumes:
+                - ./db/mongo:/data/db
