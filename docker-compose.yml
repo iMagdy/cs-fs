@@ -3,7 +3,7 @@ services:
 
     #nginx
         nginx:
-            build: ./nginx
+            image: nginx
             container_name: books-nginx
             ports: 
                 - 80:80
@@ -12,7 +12,7 @@ services:
                 - node2:node2
                 - node3:node3
             volumes:
-                - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+                - ./nginx:/etc/nginx
 
     # Back-end
         node1:
@@ -21,15 +21,13 @@ services:
             ports:
                 - 3000
             volumes:
-                - ./books-backend/app:/app
-                - ./books-backend/app.js:/app.js
-                - ./books-backend/config.js:/config.js
-                - ./books-backend/package.json:/package.json
-                - ./books-backend/package_lock.json:/package_lock
-                - ./books-backend/test.js:/test.js
+                - ./books-backend:/app
             links:
                 - mongodb
-            command: bash -c "npm install && npm start"
+            environment:
+                - admin=admin-password
+                - secret=strong-password
+            command: bash -c "cd /app && npm install && npm start"
 
         node2:
             image: node
@@ -37,15 +35,13 @@ services:
             ports:
                 - 3000
             volumes:
-                - ./books-backend/app:/app
-                - ./books-backend/app.js:/app.js
-                - ./books-backend/config.js:/config.js
-                - ./books-backend/package.json:/package.json
-                - ./books-backend/package_lock.json:/package_lock
-                - ./books-backend/test.js:/test.js
+                - ./books-backend:/app
             links:
                 - mongodb
-            command: bash -c "npm install && npm start"
+            environment:
+                - admin=admin-password
+                - secret=strong-password
+            command: bash -c "cd /app && npm install && npm start"
 
         node3:
             image: node
@@ -53,20 +49,18 @@ services:
             ports:
                 - 3000
             volumes:
-                - ./books-backend/app:/app
-                - ./books-backend/app.js:/app.js
-                - ./books-backend/config.js:/config.js
-                - ./books-backend/package.json:/package.json
-                - ./books-backend/package_lock.json:/package_lock
-                - ./books-backend/test.js:/test.js
+                - ./books-backend:/app
             links:
                 - mongodb
-            command: bash -c "npm install && npm start"
+            environment:
+                - admin=admin-password
+                - secret=strong-password
+            command: bash -c "cd /app && npm install && npm start"
 
 
     # MongoDB
         mongodb:
-            build: ./db
+            image: mongo
             container_name: books-mongo
             ports:
                 - 27017

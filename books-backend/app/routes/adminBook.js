@@ -18,7 +18,7 @@ module.exports = function(adminRoutes) {
 	
 		if (!req.body || req.body.title && req.body.title.length === 0 || req.body.category && req.body.category.length === 0 || req.body.authors && (!Array.isArray(req.body.authors) || req.body.authors.length === 0)) return res.sendStatus(400);
 
-		console.log(req.body);
+		//console.log(req.body);
 		if (req.body['authors[]']) {
 			req.body['authors'] = req.body['authors[]'];
 			delete req.body['autors[]'];

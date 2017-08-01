@@ -28,8 +28,11 @@ var apiRoutes = express.Router();
 var bookRoutes = express.Router();
 var adminRoutes = express.Router();
 
-app.set('superSecret', config.secret);
-app.set('adminSecret', config.admin);
+//app.set('superSecret', config.secret);
+//app.set('adminSecret', config.admin);
+app.set('superSecret', process.env.secret);
+app.set('adminSecret', process.env.admin);
+
 
 userRoute(app, apiRoutes);
 
@@ -39,7 +42,6 @@ function authorize(req, res, next, secret) {
   	//res.header("Access-Control-Allow-Headers", "X-Access-Token, Origin, X-Requested-With, Content-Type, Accept");
 	
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-		console.log(req.headers);
 
 	if (token) {
 		jwt.verify(token, app.get(secret), function(err, decoded) {
